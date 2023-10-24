@@ -6,23 +6,32 @@ class MonsterInc:
     
     def __init__(self):
         
-        self.monstruos = []
-        self.humanos = []
+        self.__monstruos = []
+        self.__humanos = []
         
     def agregarMonstruo(self, mon: Monstruo):
-        self.monstruos.append(mon)
+        self.__monstruos.append(mon)
     
     def agregarHumano(self, hum: Humano):
-        self.humanos.append(hum)
+        self.__humanos.append(hum)
         
     def obtenerMonstruos(self):
-        return self.monstruos
+        return self.__monstruos
     
     def obtenerHumanos(self):
-        return self.humanos
+        return self.__humanos
     
     def eliminarMonstruo(self, monstruo: Monstruo):
-        self.monstruos.remove(monstruo)
+        self.__monstruos.remove(monstruo)
     
     def eliminarHumano(self, humano: Humano):
-        self.humanos.remove(humano)
+        self.__humanos.remove(humano)
+        
+sullivan = Monstruo("James P. Sullivan", "leon")
+mike = Monstruo("Mike Wazowski", "ciclope")
+boo = Humano("Boo")
+
+monsterInc = MonsterInc()
+monsterInc.agregarMonstruo(mike)
+monsterInc.agregarMonstruo(sullivan)
+print(monsterInc.obtenerMonstruos())
