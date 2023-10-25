@@ -1,5 +1,6 @@
 from humano import Humano
 
+
 class Monstruo:
     
     maxEnergia= 100
@@ -45,20 +46,22 @@ class Monstruo:
     def obtenerPareja(self):
         return self.__pareja
     
-    def asustar(self, hum: Humano):
-        if self.__estadoDormido == False and self.__energia == Monstruo.minEnergia:
-            self.__energia -= 10
-            if self.__energia < 0:
-                self.__energia = 0
-            hum.establecerEstadoAsustado(True)
+    def asustar(self, hum, pue):
+        if  pue.obtenerMonstruo() == Monstruo and self.__tipo == "asustador" :
+            if self.__estadoDormido == False and self.__energia == Monstruo.minEnergia:
+                self.__energia -= 10
+                if self.__energia < 0:
+                    self.__energia = 0
+                hum.establecerEstadoAsustado(True)
     
-    def divertir(self, hum: Humano):
-        if self.__estadoDormido == False and self.__energia == Monstruo.minEnergia:
-            self.__energia -= 10
-            if self.__energia < 0:
-                self.__energia = 0
-            hum.establecerEstadoAsustado(False)
-    
+    def divertir(self, hum, pue):
+        if  pue.obtenerMonstruo() == self.obtenerNombre() and self.__tipo == "asustador" :
+            if self.__estadoDormido == False and self.__energia == Monstruo.minEnergia:
+                self.__energia -= 10
+                if self.__energia < 0:
+                    self.__energia = 0
+                hum.establecerEstadoAsustado(False)
+        
     def dormir(self):
         self.__estadoDormido = True
         self.__energia += 15
@@ -74,22 +77,36 @@ class Monstruo:
     def obtenerEstadoDormido(self):
         return self.__estadoDormido
     
+    def activarPuerta(self, pue, mon):
+        if self.__tipo == "asistente":
+            if pue.obtenerEstadoEnUso() == False:
+                pue.establecerEstadoActiva(True)
+                pue.establecerMonstruo(mon)
+        else:
+            print("el Monstruo tiene que ser asistente")
+    
+    def equals(self,mon):
+        return self.__nombre == mon.obtenerNombre() and self.__especie == mon.obtenerEspecie()
+    
     def __repr__(self):
         return self.__nombre
-    
 
-sullivan = Monstruo("James P. Sullivan", "leon","nose")
 
-mike = Monstruo("Mike Wazowski", "ciclope","asustador")
+
+
+
+
+# sullivan = Monstruo("James P. Sullivan", "leon","asistente")
+# mike = Monstruo("Mike Wazowski", "ciclope","asustador")
+# boo = Humano("Boo")
 # boo = Humano("Boo")
 # print(sullivan.obtenerEnergia())
 # print(mike.establecerEnergia(10))
 # print(mike.obtenerEnergia())
-print(sullivan.obtenerTipo())
-sullivan.establecerPareja(mike)
-print(sullivan.obtenerPareja())
+# print(sullivan.obtenerTipo())
+# sullivan.establecerPareja(mike)
+# print(sullivan.obtenerPareja())
 # mike.dormir()
-
 # print(mike.obtenerEstadoDormido())
 # mike.despertar()
 # print(mike.obtenerEstadoDormido())

@@ -1,37 +1,61 @@
-from humano import Humano
 from monstruo import Monstruo
-
+from puerta import Puerta
 
 class MonsterInc:
     
     def __init__(self):
         
         self.__monstruos = []
-        self.__humanos = []
+        self.__puertas = []
         
-    def agregarMonstruo(self, mon: Monstruo):
+    def agregarMonstruo(self, mon: {'asistente': Monstruo, 'asustador': Monstruo}):
         self.__monstruos.append(mon)
     
-    def agregarHumano(self, hum: Humano):
-        self.__humanos.append(hum)
-        
+    def eliminarMonstruo(self, mon: Monstruo):
+        for monstruo in self.__monstruos:
+            if monstruo['asistente'].equals(mon) or monstruo['asustador'].equals(mon):
+                self.__monstruos.remove(monstruo)
+                break
+    
     def obtenerMonstruos(self):
         return self.__monstruos
     
-    def obtenerHumanos(self):
-        return self.__humanos
+    def agregarPuertas(self, pue):
+        self.__puertas.append(pue)
     
-    def eliminarMonstruo(self, monstruo: Monstruo):
-        self.__monstruos.remove(monstruo)
+    def eliminarPuertas(self, pue):
+        for puerta in self.__puertas:
+            if puerta.equals(pue):
+                self.__puertas.remove(pue)
+                break
+            
+    def obtenerPuertas(self):
+        return self.__puertas
     
-    def eliminarHumano(self, humano: Humano):
-        self.__humanos.remove(humano)
-        
-sullivan = Monstruo("James P. Sullivan", "leon")
-mike = Monstruo("Mike Wazowski", "ciclope")
-boo = Humano("Boo")
-
 monsterInc = MonsterInc()
-monsterInc.agregarMonstruo(mike)
-monsterInc.agregarMonstruo(sullivan)
-print(monsterInc.obtenerMonstruos())
+sullivan = Monstruo("James P. Sullivan", "leon", 'asistente')
+mike = Monstruo("Mike Wazowski", "ciclope", 'asustador')
+# sullivan.establecerPareja(mike)
+# mike.establecerPareja(sullivan)
+# sam = Monstruo("Sam Thomas", "ganso", 'asistente')
+# laura = Monstruo("Laura Ingals", "raton", 'asustador')
+# sam.establecerPareja(laura)
+# laura.establecerPareja(sam)
+puerta1 = Puerta(1,mike)
+puerta2 = Puerta(2,sullivan)
+monsterInc.agregarPuertas(puerta1)
+monsterInc.agregarPuertas(puerta2)
+print(monsterInc.obtenerPuertas())
+monsterInc.eliminarPuertas(puerta2)
+print(monsterInc.obtenerPuertas())
+# monsterInc.agregarMonstruo({'asistente': sullivan, 'asustador':mike})
+# monsterInc.agregarMonstruo({'asistente': sam, 'asustador':laura})
+# print()
+# print(monsterInc.obtenerMonstruos())
+# print('-------------')
+# monsterInc.eliminarMonstruo(sam)
+# print(monsterInc.obtenerMonstruos())
+# boo = Humano("Boo")
+# monsterInc = MonsterInc()
+# monsterInc.agregarMonstruo(mike)
+# monsterInc.agregarMonstruo(sullivan)
