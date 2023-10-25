@@ -34,3 +34,5 @@ class Puerta:
     def equals(self,pue):
         return (self.humano == pue.obtenerHumano() and self.monstruo == pue.obtenerMonstruo() 
                 and self.estadoActiva == pue.obtenerEstadoActiva())
+        
+# 1-e.i: la ejecucion del metodo equals que compara humanos y monstruos esta refiriendo a una comparacion de identidad (igualdad superficial)

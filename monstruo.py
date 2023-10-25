@@ -3,12 +3,15 @@ from humano import Humano
 class Monstruo:
     
     maxEnergia= 100
+    minEnergia= 15
     
-    def __init__(self, nom: str, esp: str):
+    def __init__(self, nom: str, esp: str, tipo:str):
         self.__nombre = nom
         self.__especie = esp
         self.__energia = Monstruo.maxEnergia
         self.__estadoDormido = False
+        self.__tipo = tipo if tipo in ["asustador", "asistente"] else "asustador"
+        self.__pareja = None
     
     def establecerNombre(self,nom:str):
         self.__nombre = nom
@@ -28,16 +31,30 @@ class Monstruo:
     def obtenerEnergia(self):
         return self.__energia
     
+    def obtenerTipo(self):
+        return self.__tipo
+    
+    def establecerPareja(self, mon):
+        if self.__tipo != mon.obtenerTipo():
+            self.__pareja = mon
+        else:
+            print('los monstruos deben ser de tipo diferente')
+        
+            # if mon.obtenerPareja() 
+            
+    def obtenerPareja(self):
+        return self.__pareja
+    
     def asustar(self, hum: Humano):
-        if self.__estadoDormido == False:
+        if self.__estadoDormido == False and self.__energia == Monstruo.minEnergia:
             self.__energia -= 10
             if self.__energia < 0:
                 self.__energia = 0
             hum.establecerEstadoAsustado(True)
     
     def divertir(self, hum: Humano):
-        if self.__estadoDormido == False:
-            self.__energia -= 20
+        if self.__estadoDormido == False and self.__energia == Monstruo.minEnergia:
+            self.__energia -= 10
             if self.__energia < 0:
                 self.__energia = 0
             hum.establecerEstadoAsustado(False)
@@ -61,13 +78,16 @@ class Monstruo:
         return self.__nombre
     
 
-# sullivan = Monstruo("James P. Sullivan", "leon")
-# mike = Monstruo("Mike Wazowski", "ciclope")
+sullivan = Monstruo("James P. Sullivan", "leon","nose")
+
+mike = Monstruo("Mike Wazowski", "ciclope","asustador")
 # boo = Humano("Boo")
 # print(sullivan.obtenerEnergia())
 # print(mike.establecerEnergia(10))
 # print(mike.obtenerEnergia())
-
+print(sullivan.obtenerTipo())
+sullivan.establecerPareja(mike)
+print(sullivan.obtenerPareja())
 # mike.dormir()
 
 # print(mike.obtenerEstadoDormido())
