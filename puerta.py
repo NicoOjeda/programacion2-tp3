@@ -4,7 +4,7 @@ from monstruo import Monstruo
 
 class Puerta:
     
-    def __init__(self, num, hum):
+    def __init__(self, num:int, hum):
         self.numero = num
         self.humano = hum
         self.monstruo = None
@@ -36,6 +36,9 @@ class Puerta:
         
     def equals(self,pue):
         return (self.humano == pue.obtenerHumano() and self.monstruo == pue.obtenerMonstruo() and self.estadoActiva == pue.obtenerEstadoActiva())
+    
+    def __repr__(self):
+        return str(self.numero)
     
     
         
